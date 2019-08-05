@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<!-- <div style="text-align:center">
   <h1>
     Welcome to Angular + Python + Flask Demo!
   </h1>
@@ -18,3 +18,47 @@
   <button (click)="getEmployee()">Employees By ID</button>
   <span>Employee data: {{employee | json}}</span>
 </div>
+
+
+ -->
+
+<div class="container" style="background-color: #f8f9fa">
+  <h1 style="text-align:center">
+    Data Files Rules Report    
+  </h1>
+  <div class="card">
+    <div class="card-body">
+        <h4 style="text-align:center">
+            Place only .xlsx files. No version numbers allowed. Rename the files to <b> Academic_Events.xlsx, Campus_Events.xlsx, Contact.xlsx, Location.xlsx, Timing.xlsx, Unstructured.xlsx </b> before uploading the folder. 
+          </h4>
+    </div>
+  </div>
+  <h3>Upload Folder with data files</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <input #folderInput type="file" id="files" (change)="filesPicked(folderInput.files)" webkitDirectory>
+        </div>
+        <div class="col-sm-1">
+          <button class="btn btn-primary btn-sm" type="button" id="cancel" (click)="cancel()">cancel</button>
+        </div>
+        <div class="col-sm-5">
+          <button type="submit" class="btn btn-primary btn-sm" id="upload" (click)="uploadFile()">Upload</button>
+        </div>
+        <div class="col-sm-3" *ngIf="key">
+          <a href="http://localhost/dashboard/DataFiles_Rules_Report/Automation/DataFiles_Rules_Report.xlsx"><i class="fa fa-download" id="download" title="Data Rules Report" style="zoom: 2"></i></a>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-sm-3">
+      <input #fileInput name="file" type="file" (change)="handleFileInput($event.target.files)">
+<button mat-raised-button class="standard-button" (click)="uploadFile()">Upload file</button>
+</div>
+</div> -->
+
+    </div>
+  </div>
+</div>
+

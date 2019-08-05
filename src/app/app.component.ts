@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -13,9 +13,40 @@ export class AppComponent {
   serverData: JSON;
   employeeData: JSON;
   employee:JSON;
+  files: any = [];
+  key:boolean = false;
+  
 
   constructor(private httpClient: HttpClient) {
   }
+  
+  filesPicked(files) {
+    console.log(files); 
+    this.files = files; 
+  }
+
+  @ViewChild('fileInput') fileInput;
+  uploadFile() {
+   
+    if (this.files.length === 0) {
+      return;
+    };
+    
+    const formData: FormData = new FormData();
+    for(var i= 0; i<this.files.length; i++){
+      console.log(this.files[i]);
+      formData.append('file', this.files[i], this.files[i].name);
+    }
+      this.httpClient.post('http://127.0.0.1:5002/parse_table',formData).subscribe(data => {
+        this.key = true;
+        console.log(data);
+      })
+    
+  }
+
+  cancel(){
+    (<HTMLInputElement>document.getElementById("files")).value = '';
+  };
 
   ngOnInit() {
   }
@@ -24,19 +55,6 @@ export class AppComponent {
     this.httpClient.get('http://127.0.0.1:5002/').subscribe(data => {
       this.serverData = data as JSON;
       console.log(this.serverData);
-    })
-  }
-
-  getAllEmployees() {
-    this.httpClient.get('http://127.0.0.1:5002/employees').subscribe(data => {
-      this.employeeData = data as JSON;
-      console.log(this.employeeData);
-    })
-  }
-  getEmployee() {
-    this.httpClient.get('http://127.0.0.1:5002/employees/1').subscribe(data => {
-      this.employee = data as JSON;
-      console.log(this.employee);
     })
   }
 }
