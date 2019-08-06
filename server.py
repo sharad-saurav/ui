@@ -6,7 +6,7 @@ from flask_restful import Resource, Api
 from flask import jsonify
 import morning
 import Allowed_intents_in_Unstructured
-# import Check_for_capitalization
+import Check_for_capitalization
 # import Check_for_duplicates
 # import Check_for_missing_Keyword
 # import Check_for_capitalization
@@ -63,13 +63,12 @@ def upload_file():
     # print('request.files-------------------',request.files)
     uploaded_files = request.files.getlist("file")
     print('uploaded_files',uploaded_files)
-    # file = request.files['file[]']
-    # print('file------------------',file)
-    for fil in uploaded_files:
-        print('fil-------------',fil)
-        file = fil['file']
+    nfile = request.files['file']
+    print('nfile------------------',nfile)
+    for file in uploaded_files:
+        # print('fil-------------',fil)
+        # file = fil['file']
         print('file---------',file)
-
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
@@ -79,6 +78,7 @@ def upload_file():
             morning.morning_func()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             Allowed_intents_in_Unstructured.rule_unstructured()
+            Check_for_capitalization.rule_capitalization()
     return jsonify(result={"status": 200})
 
 

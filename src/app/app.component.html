@@ -1,26 +1,4 @@
-<!-- <div style="text-align:center">
-  <h1>
-    Welcome to Angular + Python + Flask Demo!
-  </h1>
-</div>
 
-<div>
-  <button (click)="sayHi()">Say Hi</button>
-  <span>Server data: {{serverData | json}}</span>
-</div>
-
-<div>
-  <button (click)="getAllEmployees()">All Employees</button>
-  <span>All Employee data: {{employeeData | json}}</span>
-</div>
-
-<div>
-  <button (click)="getEmployee()">Employees By ID</button>
-  <span>Employee data: {{employee | json}}</span>
-</div>
-
-
- -->
 
 <div class="container" style="background-color: #f8f9fa">
   <h1 style="text-align:center">
@@ -38,7 +16,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-3">
-          <input #folderInput type="file" id="files" (change)="filesPicked(folderInput.files)" webkitDirectory>
+          <input #folderInput type="file" id="files" (change)="filesPicked($event.target.files)" webkitDirectory>
         </div>
         <div class="col-sm-1">
           <button class="btn btn-primary btn-sm" type="button" id="cancel" (click)="cancel()">cancel</button>
@@ -47,7 +25,7 @@
           <button type="submit" class="btn btn-primary btn-sm" id="upload" (click)="uploadFile()">Upload</button>
         </div>
         <div class="col-sm-3" *ngIf="key">
-          <a href="http://localhost/dashboard/DataFiles_Rules_Report/Automation/DataFiles_Rules_Report.xlsx"><i class="fa fa-download" id="download" title="Data Rules Report" style="zoom: 2"></i></a>
+          <a href="/assets/DataFiles_Rules_Report.xlsx" download><i class="fa fa-download" id="download" title="Data Rules Report" style="zoom: 2"></i></a>
         </div>
       </div>
 
