@@ -15,7 +15,7 @@ def rule_capitalization():
 	file_directory= 'C:/uploads'
 	
 	config_file=configFile
-	target= 'C:/Users/105666/projects/pythonProject/angular-python-flask-demo/src/assets/DataFiles_Rules_Report.xlsx'
+	target= 'C:/Users/105666/projects/pythonProject/angular-python-flask-demo/DataFiles_Rules_Report.xlsx'
 	all_files=os.listdir(file_directory)
 	files=[]
 

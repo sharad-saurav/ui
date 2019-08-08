@@ -10,14 +10,13 @@ def rule_unstructured():
 	from pandas import ExcelFile
 	import validators
 	
-	print('hittttttttttt--------')
 	configFile = 'C:/Configuration.xlsx'
 	file_name='Allowed_intents_in_Unstructured.py'
 	rule=file_name[:file_name.find('.py')]
 	file_directory= 'C:/uploads'
 	
 	config_file=configFile
-	target= 'C:/Users/105666/projects/pythonProject/angular-python-flask-demo/src/assets/DataFiles_Rules_Report.xlsx'
+	target= 'C:/Users/105666/projects/pythonProject/angular-python-flask-demo/DataFiles_Rules_Report.xlsx'
 
 	all_files=os.listdir(file_directory)
 	files=[]

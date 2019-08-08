@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import 'rxjs/Rx' ;
 
 
 @Component({
@@ -15,6 +16,7 @@ export class AppComponent {
   employee:JSON;
   files: any = [];
   key:boolean = false;
+  tableData:any = [];
   
 
   constructor(private httpClient: HttpClient) {
@@ -38,11 +40,22 @@ export class AppComponent {
       formData.append('file', this.files[i], this.files[i].name);
     }
       this.httpClient.post('http://127.0.0.1:5002/parse_table',formData).subscribe(data => {
+        this.tableData = data
+        console.log(this.tableData);
         this.key = true;
-        console.log(data);
       })
-    
   }
+
+  download(){
+    this.httpClient.get('http://127.0.0.1:5002/downloadFIle').subscribe(data =>{
+      // this.tableData = data
+    })
+
+  // downloadFile(data: Response) {
+  //   const blob = new Blob([data], { type: 'text/csv' });
+  //   const url= window.URL.createObjectURL(blob);
+  //   window.open(url);
+  // }
 
   cancel(){
     (<HTMLInputElement>document.getElementById("files")).value = '';
