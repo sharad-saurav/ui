@@ -31,7 +31,6 @@ def rule_unstructured():
 
 	columns_to_apply=to_check['columns_to_apply']
 	intents=to_check['intents_to_check']
-
 	if(to_check['files_to_apply']=='ALL'):
 		files = all_files
 	else:
@@ -39,7 +38,6 @@ def rule_unstructured():
 			for file in all_files:
 				if(file.startswith(f)):
 					files.append(file)
-
 	data=[]
 
 	for file in files:
@@ -55,6 +53,5 @@ def rule_unstructured():
 					data.append(entry)
 					
 	df1 = pd.DataFrame(data, columns = ['ROW_NO', 'FILE_NAME', 'COMMENTS'])
-	print('df1-------',df1)
 	with ExcelWriter(target,engine='openpyxl',mode='a') as writer:
 		df1.to_excel(writer,sheet_name=rule,index=False)

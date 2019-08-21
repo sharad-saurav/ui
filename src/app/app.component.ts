@@ -50,7 +50,7 @@ export class AppComponent {
     this.httpClient.get('http://127.0.0.1:5002/downloadFIle').subscribe(data =>{
       // this.tableData = data
     })
-
+  }
   // downloadFile(data: Response) {
   //   const blob = new Blob([data], { type: 'text/csv' });
   //   const url= window.URL.createObjectURL(blob);

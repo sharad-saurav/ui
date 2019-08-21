@@ -18,6 +18,8 @@ def no_content_in_brackets():
 	configFile = 'C:/Configuration.xlsx'
 	rule=file_name[:file_name.find('.py')]
 	file_directory= 'C:/uploads'
+
+	print('hjcgweygcieskcbesabecacebjkscuabsjdkcje----------------------------------===============================')
 	
 	config_file=configFile
 	target= 'C:/Users/105666/projects/pythonProject/angular-python-flask-demo/DataFiles_Rules_Report.xlsx'
@@ -38,12 +40,17 @@ def no_content_in_brackets():
 	else:
 		for f in files_to_apply:
 			for file in all_files:
+				print('file-----------',file)
+				print('f-----------',f)
+				print('------------------',file.startswith(f))
 				if(file.startswith(f)):
 					files.append(file)
 
 	regex = re.compile('[@!#$%^&*()<>?/\|}{~]')
 
 	data=[]
+
+	print('files---------------------',files)
 		
 	for file in files:
 		df = pd.read_excel(file_directory+'/'+file)
@@ -56,7 +63,7 @@ def no_content_in_brackets():
 					if():
 						#print(index)
 						entry=[index,file,column_name+' has contents inside the brackets']
-						print('The row '+str(index)+' in the file '+file+' has content inside brackets in the '+column_name+' column')
+						print('The row ' + str(index) + ' in the file ' + file + ' has content inside brackets in the '+ column_name +' column')
 						data.append(entry)
 					
 	df1 = pd.DataFrame(data, columns = ['ROW_NO', 'FILE_NAME', 'COMMENTS'])
