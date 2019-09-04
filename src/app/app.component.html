@@ -13,21 +13,18 @@
   <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
           <input #folderInput type="file" id="files" (change)="filesPicked($event.target.files)" webkitDirectory>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2">
           <button class="btn btn-primary btn-sm" type="button" id="cancel" (click)="cancel()">cancel</button>
         </div>
         <div class="col-sm-4">
           <button type="submit" class="btn btn-primary btn-sm" id="upload" (click)="uploadFile()">Upload</button>
         </div>
-        <div class="col-sm-3" *ngIf="key">
+        <div class="col-sm-2" *ngIf="key">
           <!-- <a href="/assets/DataFiles_Rules_Report.xlsx" download><i class="fa fa-download" id="download" title="Data Rules Report" style="zoom: 2"></i></a> -->
-          <a href="file:///C:\Users\105666\projects\pythonProject\angular-python-flask-demo\DataFiles_Rules_Report.xlsx" download><i class="fa fa-download" title="Data Rules Report" style="zoom: 2"></i></a>
-        </div>
-        <div class="col-sm-1" *ngIf="key">
-          <button class="btn btn-primary btn-sm" type="button" id="cancel" (click)="download()">download</button>
+          <a href="https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report.xlsx" download><i class="fa fa-download" title="Data Rules Report" style="zoom: 2"></i></a>
         </div>
       </div>
     </div>
