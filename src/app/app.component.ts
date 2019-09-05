@@ -39,7 +39,7 @@ export class AppComponent {
       console.log(this.files[i]);
       formData.append('file', this.files[i], this.files[i].name);
     }
-      this.httpClient.post('http://3.14.7.96:5002/parse_table',formData).subscribe(data => {
+      this.httpClient.post('api/parse_table',formData).subscribe(data => {
         this.tableData = data
         console.log(this.tableData);
         this.key = true;
@@ -47,7 +47,7 @@ export class AppComponent {
   }
 
   download(){
-    this.httpClient.get('http://3.14.7.96:5002/downloadFIle').subscribe(data =>{
+    this.httpClient.get('api/downloadFIle').subscribe(data =>{
       // this.tableData = data
     })
   }
