@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import 'rxjs/Rx' ;
+import 'rxjs/add/operator/catch';
+import { retry, catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -17,13 +20,16 @@ export class AppComponent {
   files: any = [];
   key:boolean = false;
   tableData:any = [];
-  
+  url: string = '';
+  production:boolean = false;
 
   constructor(private httpClient: HttpClient) {
+    this.url = environment.apiUrl;
+    this.production = environment.production
   }
   
+  
   filesPicked(files) {
-    console.log(files); 
     this.files = files; 
   }
 
@@ -36,38 +42,25 @@ export class AppComponent {
     
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
-      console.log(this.files[i]);
       formData.append('file', this.files[i], this.files[i].name);
     }
-      this.httpClient.post('api/parse_table',formData).subscribe(data => {
-        this.tableData = data
-        console.log(this.tableData);
-        this.key = true;
-      })
-  }
 
-  download(){
-    this.httpClient.get('api/downloadFIle').subscribe(data =>{
-      // this.tableData = data
-    })
+    this.httpClient.post('api/parse_table', formData).subscribe(
+      data => {
+        console.log('success', data)
+        this.tableData = data
+        this.key = true;
+      },
+      error =>{ console.log('oops', error)
+      alert("request is already being processed please wait for some time and try again")
+      }
+    )
   }
-  // downloadFile(data: Response) {
-  //   const blob = new Blob([data], { type: 'text/csv' });
-  //   const url= window.URL.createObjectURL(blob);
-  //   window.open(url);
-  // }
 
   cancel(){
     (<HTMLInputElement>document.getElementById("files")).value = '';
   };
 
   ngOnInit() {
-  }
-
-  sayHi() {
-    this.httpClient.get('http://127.0.0.1:5002/').subscribe(data => {
-      this.serverData = data as JSON;
-      console.log(this.serverData);
-    })
   }
 }
