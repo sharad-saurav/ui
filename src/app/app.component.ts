@@ -20,12 +20,12 @@ export class AppComponent {
   files: any = [];
   key:boolean = false;
   tableData:any = [];
-  url: string = '';
   production:boolean = false;
+  milliseconds = '';
+  url = '';
 
   constructor(private httpClient: HttpClient) {
-    this.url = environment.apiUrl;
-    this.production = environment.production
+  
   }
   
   
@@ -39,20 +39,21 @@ export class AppComponent {
     if (this.files.length === 0) {
       return;
     };
-    
+    this.milliseconds = date.getTime().toString();
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
       formData.append('file', this.files[i], this.files[i].name);
     }
 
-    this.httpClient.post('api/parse_table', formData).subscribe(
+    this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(
       data => {
         console.log('success', data)
         this.tableData = data
+        this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
         this.key = true;
       },
       error =>{ console.log('oops', error)
-      alert("request is already being processed please wait for some time and try again")
+      alert("there is some issue please try again")
       }
     )
   }
