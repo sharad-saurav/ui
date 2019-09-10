@@ -28,35 +28,30 @@ export class AppComponent {
   
   }
   
-  
   filesPicked(files) {
     this.files = files; 
   }
 
   @ViewChild('fileInput') fileInput;
   uploadFile() {
-   
+    var date = new Date(); // some mock date
+    this.milliseconds = date.getTime().toString();
     if (this.files.length === 0) {
       return;
     };
-    var date = new Date();
-    this.milliseconds = date.getTime().toString();
+    
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
+      console.log(this.files[i]);
       formData.append('file', this.files[i], this.files[i].name);
     }
-
-    this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(
-      data => {
-        console.log('success', data)
+    console.log(this.milliseconds);
+      this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(data => {
         this.tableData = data
         this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
+        console.log(this.url);
         this.key = true;
-      },
-      error =>{ console.log('oops', error)
-      alert("there is some issue please try again")
-      }
-    )
+      })
   }
 
   cancel(){
