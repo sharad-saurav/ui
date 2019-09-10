@@ -39,6 +39,7 @@ export class AppComponent {
     if (this.files.length === 0) {
       return;
     };
+    var date = new Date();
     this.milliseconds = date.getTime().toString();
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
