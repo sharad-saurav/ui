@@ -35,25 +35,24 @@
     <thead>
       <tr>
         <th>File_Name</th>
-        <th>Total_Issues</th>
-        <th>Perfect_Excel_Format</th>
-        <th>Special_CHar_In_Entity_Name</th>
-        <th>Process_ID</th>
-        <th>Start_Date_Less_Than_End_Date</th>
-        <th>Start_Date_Less_Than_End_Time</th>
-        <th>Time_in_hh-mm-ss</th>
+        <th>Academic_Events</th>
+        <th>Campus_Events</th>
+        <th>Contact</th>
+        <th>Location</th>
+        <th>Timing</th>
+        <th>Unstructured</th>
+        <!-- <th>Summary</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of tableData" style="text-align: center">
-        <td>{{data.File_Name}}</td>
-        <td>{{data.Total_Issues}}</td>
-        <td>{{data.Perfect_Excel_Format}}</td>
-        <td>{{data.Special_CHar_In_Entity_Name}}</td>
-        <td>{{data.Process_ID}}</td>
-        <td>{{data.Start_Date_Less_Than_End_Date}}</td>
-        <td>{{data.Start_Date_Less_Than_End_Time}}</td>
-        <td>{{data.Time_in_hh}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.academicEvents}}</td>
+        <td>{{data.campusEvents}}</td>
+        <td>{{data.contact}}</td>
+        <td>{{data.location}}</td>
+        <td>{{data.timing}}</td>
+        <td>{{data.unstructured}}</td>
       </tr>
     </tbody>
   </table>
