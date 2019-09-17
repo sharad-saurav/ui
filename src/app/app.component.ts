@@ -51,7 +51,11 @@ export class AppComponent {
         this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
         console.log(this.url);
         this.key = true;
-      })
+    },
+      error =>{ console.log('oops', error)
+      alert("There is some error please check and try again later")
+      }
+    )
   }
 
   cancel(){
