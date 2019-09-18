@@ -38,12 +38,12 @@ export class AppComponent {
     var date = new Date();
     this.milliseconds = date.getTime().toString();
     if (this.files.length === 0) {
+      this.imageKey = true;
       return;
     };
     
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
-      console.log(this.files[i]);
       formData.append('file', this.files[i], this.files[i].name);
     }
     console.log(this.milliseconds);
