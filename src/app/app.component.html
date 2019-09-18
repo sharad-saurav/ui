@@ -1,7 +1,12 @@
+<div *ngIf="imageKey">
+    <img src="assets/image/giphy.gif" id="loading-bar">
+</div>
 <div class="container" style="background-color: #5282b3">
   <h1 style="text-align:center;margin-top: 20px" >
+      <a href="https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/rules.xlsx" download><i class="fa fa-info-circle" aria-hidden="true" style="float:right; margin-top: 8px"></i></a>
     Data Files Rules Report    
   </h1>
+  
   <div class="card">
     <div class="card-body">
         <h4 style="text-align:center">
@@ -35,28 +40,30 @@
     <thead>
       <tr>
         <th>File_Name</th>
-        <th>Total_Issues</th>
-        <th>Perfect_Excel_Format</th>
-        <th>Special_CHar_In_Entity_Name</th>
-        <th>Process_ID</th>
-        <th>Start_Date_Less_Than_End_Date</th>
-        <th>Start_Date_Less_Than_End_Time</th>
-        <th>Time_in_hh-mm-ss</th>
+        <th>Academic_Events</th>
+        <th>Campus_Events</th>
+        <th>Contact</th>
+        <th>Location</th>
+        <th>Timing</th>
+        <th>Unstructured</th>
+        <!-- <th>Summary</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of tableData" style="text-align: center">
-        <td>{{data.File_Name}}</td>
-        <td>{{data.Total_Issues}}</td>
-        <td>{{data.Perfect_Excel_Format}}</td>
-        <td>{{data.Special_CHar_In_Entity_Name}}</td>
-        <td>{{data.Process_ID}}</td>
-        <td>{{data.Start_Date_Less_Than_End_Date}}</td>
-        <td>{{data.Start_Date_Less_Than_End_Time}}</td>
-        <td>{{data.Time_in_hh}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.academicEvents}}</td>
+        <td>{{data.campusEvents}}</td>
+        <td>{{data.contact}}</td>
+        <td>{{data.location}}</td>
+        <td>{{data.timing}}</td>
+        <td>{{data.unstructured}}</td>
+        <!-- <td class="tooltip">{{data.unstructured}}</td> -->
+        <!-- <td><button class="btn btn-sm btn-primary" (click)="checkRules(data.File_Name)">Click Here</button></td> -->
       </tr>
     </tbody>
   </table>
 </div>
+
 
 
