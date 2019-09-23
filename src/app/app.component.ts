@@ -38,7 +38,7 @@ export class AppComponent {
     var date = new Date();
     this.milliseconds = date.getTime().toString();
     if (this.files.length === 0) {
-      this.imageKey = true;
+      this.imageKey = false;
       return;
     };
     
