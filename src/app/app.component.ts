@@ -5,6 +5,7 @@ import 'rxjs/Rx' ;
 import 'rxjs/add/operator/catch';
 import { retry, catchError } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,7 +24,6 @@ export class AppComponent {
   milliseconds = '';
   url = '';
   imageKey:boolean = false;
-
   constructor(private httpClient: HttpClient) {
   
   }
@@ -34,30 +34,37 @@ export class AppComponent {
 
   @ViewChild('fileInput') fileInput;
   uploadFile() {
+    this.tableData = [];
     this.imageKey = true;
     var date = new Date();
+    this.key = false;
     this.milliseconds = date.getTime().toString();
     if (this.files.length === 0) {
-      this.imageKey = true;
+      this.imageKey = false;
       return;
     };
     
     const formData: FormData = new FormData();
     for(var i= 0; i<this.files.length; i++){
       formData.append('file', this.files[i], this.files[i].name);
-    }
+    } 
     console.log(this.milliseconds);
-      this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(data =>{
-        this.imageKey = false;
-        this.tableData = data
+      this.httpClient.post('http://127.0.0.1:5002/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(data =>{
+      this.imageKey = false;
+        this.tableData = data;
         console.log(this.tableData);
-        this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
-        console.log(this.url);
-        this.key = true;
+        if(this.tableData[0].name == 'Total_Issues'){
+          this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
+          console.log(this.url);
+          this.key = true;
+        }else{
+          alert('there was' + this.tableData.toString() + 'column missing in the excel you uploaded');
+        }
       },
       error =>{ console.log('oops', error)
       this.imageKey = false;
-      alert("There is some error please check and try again later")
+      //error = error.toString();
+      alert(error.error.text);
       }
     )
   }
