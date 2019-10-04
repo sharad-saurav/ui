@@ -51,9 +51,10 @@ export class AppComponent {
     console.log(this.milliseconds);
       this.httpClient.post('http://127.0.0.1:5002/parse_table?milliseconds=' + this.milliseconds, formData).subscribe(data =>{
       this.imageKey = false;
+      console.log(data);
         this.tableData = data;
-        console.log(this.tableData);
-        if(this.tableData[0].name == 'Total_Issues'){
+        console.log(this.tableData[0].Date_in_YYYY_MM_DD_format);
+        if(this.tableData[0].File_name && this.tableData[0].File_name != ''){
           this.url = 'https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/DataFiles_Rules_Report' + this.milliseconds + '.xlsx'
           console.log(this.url);
           this.key = true;
