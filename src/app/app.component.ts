@@ -322,6 +322,10 @@ export class AppComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput;
   uploadFile() {
+    if(this.ruleApplied.length == 0){
+      alert("please select a rule first");
+      return;
+    }
     this.tableData = [];
     this.imageKey = true;
     var date = new Date();
@@ -469,13 +473,16 @@ export class AppComponent implements OnInit {
 
   saveConfig(){
     if(this.configArray.length != 0){
+      this.imageKey = true;
         let data = {
           "configArray": this.configArray
         };
         this.httpClient.post('http://127.0.0.1:5002/changeConfig', data).subscribe(data =>{
+          this.imageKey = false;
           alert("config file changed please download and check the changes");
         },
         error =>{ console.log('oops', error)
+        this.imageKey = false;
           alert(error.error.text);
         })
     }else{
