@@ -341,7 +341,7 @@ export class AppComponent implements OnInit {
       formData.append('file', this.files[i], this.files[i].name);
     } 
     console.log(this.milliseconds);
-      this.httpClient.post('http://127.0.0.1:5002/parse_table?milliseconds=' + this.milliseconds +'&rules=' + this.ruleApplied, formData).subscribe(data =>{
+      this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds +'&rules=' + this.ruleApplied, formData).subscribe(data =>{
       this.imageKey = false;
       console.log(data);
         this.tableData = data;
