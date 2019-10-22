@@ -1,0 +1,93 @@
+
+<div class="loading" *ngIf="imageKey">Loading&#8230;</div>
+    <div class="container">
+        <div style="text-align:center;margin-top: 50px" class="shadow-lg p-3 mb-5 bg-white rounded">
+            <button type="submit" class="btn btn-primary btn-sm" (click)="toggleConfig()" style="float: right;margin-top: 16px;">{{buttonName}}</button>
+            <h1>Edit Configuration</h1>
+         
+        </div>
+<div style="margin-top: 50px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    
+        <div class="row">
+          <div class="col-sm-4">
+              <ng-multiselect-dropdown
+              [placeholder]="'select rules'"
+              [data]="rules"
+              [(ngModel)]="selectedItems"
+              [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)">
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="col-sm-3">
+              <ng-multiselect-dropdown
+              [placeholder]="'select files to apply'"
+              [data]="fileArray"
+              [(ngModel)]="selectedFiles"
+              [settings]="fileDropdownSettings"
+            >
+            </ng-multiselect-dropdown>
+            </div>
+
+            <div class="col-sm-3">
+                <ng-multiselect-dropdown
+                [placeholder]="'select columns to apply'"
+                [data]="columnNames"
+                [(ngModel)]="selectedColumns"
+                [settings]="columnDropdownSettings"
+              >
+              </ng-multiselect-dropdown>
+              </div>
+              <div class="col-sm-1">
+                  <button type="submit" class="btn btn-primary btn-sm" (click)="addRule()">Add</button>
+                </div>
+
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary btn-sm" (click)="saveConfig()">Save</button>
+                  </div>
+
+              </div>
+
+            </div>
+
+
+        <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr style="text-align: center">
+              <th>Rules</th>
+              <th>Columns To Apply</th>
+              <th>Files To Apply</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of configArray; let i = index" style="text-align: center">
+              <td>{{data.rule}}</td>
+              <td>{{data.columnsToApply}}</td>
+              <td>{{data.filesToApply}}</td>
+              <td><button type="delete" class="btn btn-primary btn-sm" (click)="deleteRule(i)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+        <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 50px" *ngIf="showConfig">
+      <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Rules</th>
+                <th>Columns To Apply</th>
+                <th>Files To Apply</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of configData; let i = index" style="text-align: left">
+                <td>{{data.RULE}}</td>
+                <td>{{data.TO_CHECK["columns_to_apply"]}}</td>
+                <td>{{data.TO_CHECK["files_to_apply"]}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+</div>

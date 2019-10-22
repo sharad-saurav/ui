@@ -1,18 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { EditConfigComponent } from './components/edit-config/edit-config.component';
+import { DataRuleReportComponent } from './components/data-rule-report/data-rule-report.component';
+import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
- 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EditConfigComponent,
+    DataRuleReportComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     NgMultiSelectDropDownModule.forRoot()

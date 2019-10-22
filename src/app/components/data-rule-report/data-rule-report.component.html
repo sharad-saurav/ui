@@ -1,0 +1,126 @@
+<div class="loading" *ngIf="imageKey">Loading&#8230;</div>
+<div class="container">
+  <div style="text-align:center;margin-top: 20px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <a href="https://s3.us-east.cloud-object-storage.appdomain.cloud/sharad-saurav-bucket/rules.xlsx" download>
+    <i class="fa fa-download" title="Data Rules Report" style="zoom: 2; float: right;margin-top: 7px;"></i></a><h1>Data Files Rules Report</h1>
+  </div>
+  <div style="margin-top: 30px" class="shadow-lg p-3 mb-5 bg-white rounded">             
+    <h4 style="text-align:center">Place only .xlsx files. No version numbers allowed. Rename the files to
+    <b> Academic_Events.xlsx, Campus_Events.xlsx, Contact.xlsx, Location.xlsx, Timing.xlsx, Unstructured.xlsx 
+    </b> before uploading the folder. </h4>
+  </div>
+                
+  <div style="margin-top: 30px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="row">
+        <div class="col-sm-4">
+        <input #folderInput type="file" id="files" (change)="filesPicked($event.target.files)" webkitDirectory>
+        </div>
+        <div class="col-sm-1">
+        <button class="btn btn-primary btn-sm" type="button" id="cancel" (click)="cancel()">cancel</button>
+        </div>
+        <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary btn-sm" id="upload" (click)="uploadFile()">Upload</button>
+        </div>
+        <div class="col-sm-1" *ngIf="key">
+        <a href={{url}} download><i class="fa fa-download" title="Data Rules Report" style="zoom: 2"></i></a>
+        </div>
+    </div>
+  </div>
+
+  <!-- <table class="table table-striped table-bordered table-responsive shadow-lg p-3 mb-5 bg-white rounded" style="margin-top: 20px">
+    <thead>
+      <tr>
+        <th>Check All <input
+          type="checkbox"
+          (click)="checkAll()"/></th>
+        <th>Rule</th>
+        <th>Rule Definition</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let data of ruleData" style="text-align: center">
+          <td><input
+            type="checkbox"
+            [checked]="data.select"
+            (click)="getCheckBoxItem(data.rule)"/></td>
+          <td>{{data.rule}}</td>
+          <td>{{data.ruleDefinition}}</td>
+        </tr>
+      </tbody>
+  </table> -->
+
+  <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded"  *ngIf="key">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>File_Name</th>
+          <th>Total_Issues</th>
+          <th *ngIf="allowedIntentsInUnstructured">Allowed_intents_in_Unstructured</th>
+          <th *ngIf="checkForDuplicates">Check_for_duplicates</th>
+          <th *ngIf="checkForMissingKeyword">Check_for_missing_Keyword</th>
+          <th *ngIf="checkForCapitalization">Check_for_capitalization</th>
+          <th *ngIf="correctnessOfMapUrl">Correctness_of_MAP_URL</th>
+          <th *ngIf="correctnessOfShortRefUrl">Correctness_of_Short_Ref_URL</th>
+          <th *ngIf="dateInYYYYMMDDFormat">Date_in_YYYY-MM-DD_format</th>
+          <th *ngIf="descriptionTextNotSame">Description_text_not_same</th>
+          <th *ngIf="duplicateInEntityInteractn">Duplicate_in_Entity_Interactn</th>
+          <th *ngIf="emailIdValidity">Email_id_validity</th>
+          <th *ngIf="exactDatesAvailable">Exact_dates_available</th>
+          <th *ngIf="exceeding500Characters">Exceeding_500_characters</th>
+          <th *ngIf="latitudeLongitude">Latitude_Longitude</th>
+          <th *ngIf="multipleSpacesInTxt">Multiple_Spaces_in_txt</th>
+          <th *ngIf="noContentInBrackets">No_content_in_brackets</th>
+          <th *ngIf="noAcadEventsInTiming">No_AcadEvents_in_Timing</th>
+          <th *ngIf="noDateSpecialCharacters">No_date_special_characters</th>
+          <th *ngIf="noPhoneUrlInVoice">No_phone_url_in_voice</th>
+          <th *ngIf="noPreceeding0InRoomNo">No_preceeding_0_in_room_no</th>
+          <th *ngIf="noRefUrlInText">No_Ref_URL_in_text</th>
+          <th *ngIf="noSentenceInVoiceColumn">No_sentence_in_voice_column</th>
+          <th *ngIf="noTimingForAcadEvents">No_timing_for_acad_events</th>
+          <th *ngIf="noTimingsValuesInTxt">No_timings_values_in_txt</th>
+          <th *ngIf="numberingBulletPoints">Numbering_bullet_points</th>
+          <th *ngIf="processId">Process_ID</th>
+          <th *ngIf="specialCharInEntityName">Special_Char_in_Entity_Name</th>
+          <th *ngIf="startDateLessThanEndDate">Start_date_less_than_end_date</th>
+          <th *ngIf="startTimeLessThanEndTime">Start_time_less_than_end_time</th>
+          <th *ngIf="timeInHHMMSSFormat">Time_in_HH_MM_SS_format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of tableData" style="text-align: center">
+          <td>{{data.File_name}}</td>
+          <td>{{data.Total_Issues}}</td>
+          <td *ngIf="allowedIntentsInUnstructured">{{data.Allowed_intents_in_Unstructured}}</td>
+          <td *ngIf="checkForDuplicates">{{data.Check_for_duplicates}}</td>
+          <td *ngIf="checkForMissingKeyword">{{data.Check_for_missing_Keyword}}</td>
+          <td *ngIf="checkForCapitalization">{{data.Check_for_capitalization}}</td>
+          <td *ngIf="correctnessOfMapUrl">{{data.Correctness_of_MAP_URL}}</td>
+          <td *ngIf="correctnessOfShortRefUrl">{{data.Correctness_of_Short_Ref_URL}}</td>
+          <td *ngIf="dateInYYYYMMDDFormat">{{data.Date_in_YYYY_MM_DD_format}}</td>
+          <td *ngIf="descriptionTextNotSame">{{data.Description_text_not_same}}</td>
+          <td *ngIf="duplicateInEntityInteractn">{{data.Duplicate_in_Entity_Interactn}}</td>
+          <td *ngIf="emailIdValidity">{{data.Email_id_validity}}</td>
+          <td *ngIf="exactDatesAvailable">{{data.Exact_dates_available}}</td>
+          <td *ngIf="exceeding500Characters">{{data.Exceeding_500_characters}}</td>
+          <td *ngIf="latitudeLongitude">{{data.Latitude_Longitude}}</td>
+          <td *ngIf="multipleSpacesInTxt">{{data.Multiple_Spaces_in_txt}}</td>
+          <td *ngIf="noContentInBrackets">{{data.No_content_in_brackets}}</td>
+          <td *ngIf="noAcadEventsInTiming">{{data.No_AcadEvents_in_Timing}}</td>
+          <td *ngIf="noDateSpecialCharacters">{{data.No_date_special_characters}}</td>
+          <td *ngIf="noPhoneUrlInVoice">{{data.No_phone_url_in_voice}}</td>
+          <td *ngIf="noPreceeding0InRoomNo">{{data.No_preceeding_0_in_room_no}}</td>
+          <td *ngIf="noRefUrlInText">{{data.No_Ref_URL_in_text}}</td>
+          <td *ngIf="noSentenceInVoiceColumn">{{data.No_sentence_in_voice_column}}</td>
+          <td *ngIf="noTimingForAcadEvents">{{data.No_timing_for_acad_events}}</td>
+          <td *ngIf="noTimingsValuesInTxt">{{data.No_timings_values_in_txt}}</td>
+          <td *ngIf="numberingBulletPoints">{{data.Numbering_bullet_points}}</td>
+          <td *ngIf="processId">{{data.Process_ID}}</td>
+          <td *ngIf="specialCharInEntityName">{{data.Special_Char_in_Entity_Name}}</td>
+          <td *ngIf="startDateLessThanEndDate">{{data.Start_date_less_than_end_date}}</td>
+          <td *ngIf="startTimeLessThanEndTime">{{data.Start_time_less_than_end_time}}</td>
+          <td *ngIf="timeInHHMMSSFormat">{{data.Time_in_HH_MM_SS_format}}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
