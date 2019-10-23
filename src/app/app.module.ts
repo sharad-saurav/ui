@@ -9,7 +9,7 @@ import { EditConfigComponent } from './components/edit-config/edit-config.compon
 import { DataRuleReportComponent } from './components/data-rule-report/data-rule-report.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    // NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
