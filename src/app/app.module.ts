@@ -9,6 +9,7 @@ import { EditConfigComponent } from './components/edit-config/edit-config.compon
 import { DataRuleReportComponent } from './components/data-rule-report/data-rule-report.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 // import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
@@ -26,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     // NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
