@@ -19,6 +19,7 @@ export class EditConfigComponent implements OnInit {
   fileDropdownSettings:any = {};
   selectedFiles:any = [];
   columnNames:any = [];
+  fileName:string = '';
   columnDropdownSettings:any = {};
   selectedColumns:any = [];
   configData:any = [];
@@ -27,11 +28,14 @@ export class EditConfigComponent implements OnInit {
   imageKey:boolean = false;
   showConfig:boolean = false;
   buttonName:string = "Show Config";
+  columns = [{
+    "name": ""
+  }];
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('http://127.0.0.1:5002/downloadConfig').subscribe(data =>{
+    this.httpClient.get('api/downloadConfig').subscribe(data =>{
       console.log(data);
       this.configData = data;
       this.configData.forEach(element => {
@@ -43,6 +47,26 @@ export class EditConfigComponent implements OnInit {
     error =>{ console.log('oops', error)
     alert(error.error.text);
       
+    })
+
+
+    this.httpClient.get('api/downloadFileAndColumnNames').subscribe((data:any) =>{
+      console.log(data)
+      this.fileArray = data.fileArray;
+      this.columnNames = data.columnNames;
+      this.columnNames = JSON.parse(this.columnNames)
+      this.fileArray = JSON.parse(this.fileArray)
+      console.log(this.fileArray)
+      console.log(this.columnNames)
+      this.fileArray = [].concat.apply([], this.fileArray);
+      this.columnNames = [].concat.apply([], this.columnNames);
+      // this.fileArray = [].concat.apply([], this.fileArray);
+      console.log(this.fileArray)
+      // this.columnNames = [].concat.apply([], this.columnNames);
+      console.log(this.columnNames)
+    },
+    error =>{ console.log('oops', error)
+    alert(error.error.text);
     })
 
     this.rules = [
@@ -86,7 +110,6 @@ export class EditConfigComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    this.fileArray = ["Academic_Events", "Campus_Events", "Contact", "Location", "Timing", "Unstructured"];
     this.selectedFiles = [
     ];
 
@@ -98,53 +121,53 @@ export class EditConfigComponent implements OnInit {
       allowSearchFilter: true
     };
 
-    this.columnNames= [
-      "SUBJECT_AREA",
-      "SAMPLE_QUESTION",
-      "ENTITY_TYPE",
-      "INTENT",
-      "COPIED_FROM",
-      "ENTITY_NAME",
-      "SECONDARY_ENTITY_NAME",
-      "KEYWORD",
-      "DESCRIPTION",
-      "PRESENTER",
-      "START_DATE",
-      "END_DATE",
-      "OCCURANCE",
-      "WEEKDAY_START_TIME",
-      "WEEKDAY_END_TIME",
-      "WEEKEND_START_TIME",
-      "WEEKEND_END_TIME",
-      "MON_START_TIME",
-      "MON_END_TIME",
-      "TUE_START_TIME",
-      "TUE_END_TIME",
-      "WED_START_TIME",
-      "WED_END_TIME",
-      "THU_START_TIME",
-      "THU_END_TIME",
-      "FRI_START_TIME",
-      "FRI_END_TIME",
-      "SAT_START_TIME",
-      "SAT_END_TIME",
-      "SUN_START_TIME",
-      "SUN_END_TIME",
-      "EXCEPTION_TEXT",
-      "TEXT",
-      "VOICE",
-      "VOICE_ONLY",
-      "PHONE",
-      "EMAIL",
-      "LOCATION",
-      "LATITUDE",
-      "LONGITUDE",
-      "REF_URL",
-      "MEDIA",
-      "LANGUAGES",
-      "PROCESS_AGENT_ID",
-      "PROCESS_ID"
-      ];
+    // this.columnNames= [
+    //   "SUBJECT_AREA",
+    //   "SAMPLE_QUESTION",
+    //   "ENTITY_TYPE",
+    //   "INTENT",
+    //   "COPIED_FROM",
+    //   "ENTITY_NAME",
+    //   "SECONDARY_ENTITY_NAME",
+    //   "KEYWORD",
+    //   "DESCRIPTION",
+    //   "PRESENTER",
+    //   "START_DATE",
+    //   "END_DATE",
+    //   "OCCURANCE",
+    //   "WEEKDAY_START_TIME",
+    //   "WEEKDAY_END_TIME",
+    //   "WEEKEND_START_TIME",
+    //   "WEEKEND_END_TIME",
+    //   "MON_START_TIME",
+    //   "MON_END_TIME",
+    //   "TUE_START_TIME",
+    //   "TUE_END_TIME",
+    //   "WED_START_TIME",
+    //   "WED_END_TIME",
+    //   "THU_START_TIME",
+    //   "THU_END_TIME",
+    //   "FRI_START_TIME",
+    //   "FRI_END_TIME",
+    //   "SAT_START_TIME",
+    //   "SAT_END_TIME",
+    //   "SUN_START_TIME",
+    //   "SUN_END_TIME",
+    //   "EXCEPTION_TEXT",
+    //   "TEXT",
+    //   "VOICE",
+    //   "VOICE_ONLY",
+    //   "PHONE",
+    //   "EMAIL",
+    //   "LOCATION",
+    //   "LATITUDE",
+    //   "LONGITUDE",
+    //   "REF_URL",
+    //   "MEDIA",
+    //   "LANGUAGES",
+    //   "PROCESS_AGENT_ID",
+    //   "PROCESS_ID"
+    //   ];
 
       this.columnDropdownSettings = {
         singleSelection: false,
@@ -194,7 +217,7 @@ export class EditConfigComponent implements OnInit {
     //   selectFile.push(element.text);
     // })
 
-    if(this.selectedFiles.length == 6){
+    if(this.selectedFiles.length == this.fileArray.length){
       this.configArray.push({"rule": this.selectedItems[0], "columnsToApply":this.selectedColumns, "filesToApply": "ALL"})
     }else{
       this.configArray.push({"rule": this.selectedItems[0], "columnsToApply":this.selectedColumns, "filesToApply":this.selectedFiles})
@@ -217,7 +240,7 @@ export class EditConfigComponent implements OnInit {
         let data = {
           "configArray": this.configArray
         };
-        this.httpClient.post('http://127.0.0.1:5002/changeConfig', data).subscribe(data =>{
+        this.httpClient.post('api/changeConfig', data).subscribe(data =>{
           this.imageKey = false;
           window.location.reload();
           alert("config file changed please download and check the changes");
@@ -244,4 +267,61 @@ export class EditConfigComponent implements OnInit {
     }
   }
 
+  addColumn = function () {
+    this.column = {
+      "name": ""
+    };
+
+    console.log('hit');
+    console.log(this.column)
+    
+    this.columns.push(this.column);
+    console.log(this.columns);
+  }
+
+  delColumnName = function (index) {
+    if (this.column.length == 1) {
+        return;
+    } else {
+        this.columns.splice(index, 1);
+    }
+  }
+
+  saveFileAndColumn(){
+    console.log('hit')
+    let columnNames = []; 
+    if(this.fileName == '' && !this.fileName){
+      alert("please enter file name");
+      return;
+    }
+    this.columns.forEach(element => {
+      if(element.name == '' && !element.name){
+        alert("column box left empty");
+        return;
+      }else{
+        columnNames.push(element.name);
+      }
+    });
+
+    let data = {
+      "fileName" : this.fileName,
+      "columnNames": columnNames 
+    };
+
+    console.log(data)
+
+    this.imageKey = true;
+
+    this.httpClient.post('api/uploadFileAndColumn', data).subscribe(data =>{
+      this.imageKey = false;
+      window.location.reload();
+      alert("file and column names added");
+    },
+    error =>{ console.log('oops', error)
+      this.imageKey = false;
+      alert(error.error.text);
+      window.location.reload();
+    })
+
+  }
 }
