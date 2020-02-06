@@ -214,7 +214,7 @@ export class DataRuleReportComponent implements OnInit {
     this.ruleData.forEach(element => {
       this.ruleApplied.push(element.rule);
     });
-    console.log( this.ruleApplied);
+    console.log(this.ruleApplied);
   }
 
   filesPicked(files) {
@@ -241,8 +241,10 @@ export class DataRuleReportComponent implements OnInit {
     for(var i= 0; i<this.files.length; i++){
       formData.append('file', this.files[i], this.files[i].name);
     } 
+    console.log(formData);
     console.log(this.milliseconds);
-      this.httpClient.post('http://127.0.0.1:5002/parse_table?milliseconds=' + this.milliseconds +'&rules=' + this.ruleApplied, formData).subscribe(data =>{
+    console.log(this.ruleApplied);
+      this.httpClient.post('api/parse_table?milliseconds=' + this.milliseconds +'&rules=' + this.ruleApplied, formData).subscribe(data =>{
       this.imageKey = false;
       console.log(data);
         this.tableData = data;
@@ -251,99 +253,110 @@ export class DataRuleReportComponent implements OnInit {
           console.log(this.url);
           this.tableData.forEach(element => {
             if("Allowed_intents_in_Unstructured" in element){
+              console.log("Allowed_intents_in_Unstructured");
               this.allowedIntentsInUnstructured = true;
             }
             if("Check_for_duplicates" in element){
+              console.log("Check_for_duplicates");
               this.checkForDuplicates = true;
             }
             if("Check_for_missing_Keyword" in element){
+              console.log("Check_for_missing_Keyword");
               this.checkForMissingKeyword = true;
             }
             if("Check_for_capitalization" in element){
+              console.log("Check_for_capitalization");
               this.checkForCapitalization = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
-              this.checkForDuplicates = true;
-            }
-            if("Allowed_intents_in_Unstructured" in element){
-              this.checkForMissingKeyword = true;
-            }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Check_if_date_time_are_blank" in element){
+              console.log("Check_if_date_time_are_blank");
               this.checkIfDateTimeAreBlank = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Correctness_of_MAP_URL" in element){
+              console.log("Correctness_of_MAP_URL");
               this.correctnessOfMapUrl = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Correctness_of_Short_Ref_URL" in element){
+              console.log("Correctness_of_Short_Ref_URL");
               this.correctnessOfShortRefUrl = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Date_in_YYYY-MM-DD_format" in element){
+              console.log("Date_in_YYYY-MM-DD_format");
               this.dateInYYYYMMDDFormat = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Description_text_not_same" in element){
+              console.log("Description_text_not_same");
               this.descriptionTextNotSame = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Duplicate_in_Entity_Interactn" in element){
+              console.log("Duplicate_in_Entity_Interactn");
               this.duplicateInEntityInteractn = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Email_id_validity" in element){
+              console.log("Email_id_validity");
               this.emailIdValidity = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Exact_dates_available" in element){
+              console.log("Exact_dates_available");
               this.exactDatesAvailable = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Exceeding_500_characters" in element){
+              console.log("Exceeding_500_characters");
               this.exceeding500Characters = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Latitude_Longitude" in element){
+              console.log("Latitude_Longitude");
               this.latitudeLongitude = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Multiple_Spaces_in_txt" in element){
+              console.log("Multiple_Spaces_in_txt");
               this.multipleSpacesInTxt = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_AcadEvents_in_Timing" in element){
+              console.log("No_AcadEvents_in_Timing");
               this.noAcadEventsInTiming = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_content_in_brackets" in element){
+              console.log("No_content_in_brackets");
               this.noContentInBrackets = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_date_special_characters" in element){
               this.noDateSpecialCharacters = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_phone_url_in_voice" in element){
               this.noPhoneUrlInVoice = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_preceeding_0_in_room_no" in element){
               this.noPreceeding0InRoomNo = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_Ref_URL_in_text" in element){
               this.noRefUrlInText = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_sentence_in_voice_column" in element){
               this.noSentenceInVoiceColumn = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_timing_for_acad_events" in element){
               this.noTimingForAcadEvents = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("No_timings_values_in_txt" in element){
               this.noTimingsValuesInTxt = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Numbering_bullet_points" in element){
               this.numberingBulletPoints = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Process_ID" in element){
               this.processId = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Special_Char_in_Entity_Name" in element){
               this.specialCharInEntityName = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Start_date_less_than_end_date" in element){
               this.startDateLessThanEndDate = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Start_time_less_than_end_time" in element){
               this.startTimeLessThanEndTime = true;
             }
-            if("Allowed_intents_in_Unstructured" in element){
+            if("Time_in_HH_MM_SS_format" in element){
               this.timeInHHMMSSFormat = true;
             }
             console.log(this.allowedIntentsInUnstructured);

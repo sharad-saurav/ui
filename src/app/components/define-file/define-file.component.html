@@ -1,0 +1,44 @@
+<div class="loading" *ngIf="imageKey">Loading&#8230;</div>
+  <div class="container">
+<div style="margin-top: 50px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="row">
+      <div class="col-sm-3">
+        <input type="text" name="fileName" [(ngModel)]="fileName" placeholder="Enter File Name" class="form-control">
+        <i class="fa fa-refresh" aria-hidden="true"(click)="checkFileName()"></i>
+      </div>
+      <div class="col-sm-1">
+        <button type="submit" class="btn btn-primary btn-sm" (click)="addColumn()">Add</button>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary btn-sm" (click)="nav()">editConfig</button>
+      </div>
+      
+    </div>
+    <div class="row" style="margin-top: 20px;"  *ngFor="let column of columns; index as i;">
+      <div class="col-sm-5">
+        <input type="text" name="colName" [(ngModel)]="column.name" placeholder="Enter column Name" class="form-control">
+      </div>
+      <div class="col-sm-1">
+        <a (click)="delColumnName(i)"><i class="fa fa-trash-o"></i></a>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px;" >
+      <div class="col-sm-8">
+
+      </div>
+      <div class="col-sm-1">
+    <button type="submit" class="btn btn-primary btn-sm" (click)="saveFileAndColumn()" style="float: right;">Save</button>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 50px" class="shadow-lg p-3 mb-5 bg-white rounded">
+    <h3 style="text-align: center;">Note</h3>
+ 
+    <ul>
+        <li>If you need to test a file which is not in the system yet, Write the name of the file and add corresponding necessay columns.</li>
+        <li>If you need to change the mandatory columns write the name of the file click on icon it will show all the columns pre existing you can delete or add.</li>
+        <li>Columns added with the file must be in the specified file as they will be automatically become mandatory columns.</li>
+        <li style="color: red;">IMPORTANT: Always click on icon after writing the new file name for checking if the file exists or not.</li>
+    </ul>  
+  </div>
+</div>

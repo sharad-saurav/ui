@@ -59,6 +59,7 @@
           <th *ngIf="checkForDuplicates">Check_for_duplicates</th>
           <th *ngIf="checkForMissingKeyword">Check_for_missing_Keyword</th>
           <th *ngIf="checkForCapitalization">Check_for_capitalization</th>
+          <th *ngIf="checkIfDateTimeAreBlank">Check_if_date_time_are_blank</th>
           <th *ngIf="correctnessOfMapUrl">Correctness_of_MAP_URL</th>
           <th *ngIf="correctnessOfShortRefUrl">Correctness_of_Short_Ref_URL</th>
           <th *ngIf="dateInYYYYMMDDFormat">Date_in_YYYY-MM-DD_format</th>
@@ -89,36 +90,99 @@
       <tbody>
         <tr *ngFor="let data of tableData" style="text-align: center">
           <td>{{data.File_name}}</td>
-          <td>{{data.Total_Issues}}</td>
-          <td *ngIf="allowedIntentsInUnstructured">{{data.Allowed_intents_in_Unstructured}}</td>
-          <td *ngIf="checkForDuplicates">{{data.Check_for_duplicates}}</td>
-          <td *ngIf="checkForMissingKeyword">{{data.Check_for_missing_Keyword}}</td>
-          <td *ngIf="checkForCapitalization">{{data.Check_for_capitalization}}</td>
-          <td *ngIf="correctnessOfMapUrl">{{data.Correctness_of_MAP_URL}}</td>
-          <td *ngIf="correctnessOfShortRefUrl">{{data.Correctness_of_Short_Ref_URL}}</td>
-          <td *ngIf="dateInYYYYMMDDFormat">{{data.Date_in_YYYY_MM_DD_format}}</td>
-          <td *ngIf="descriptionTextNotSame">{{data.Description_text_not_same}}</td>
-          <td *ngIf="duplicateInEntityInteractn">{{data.Duplicate_in_Entity_Interactn}}</td>
-          <td *ngIf="emailIdValidity">{{data.Email_id_validity}}</td>
-          <td *ngIf="exactDatesAvailable">{{data.Exact_dates_available}}</td>
-          <td *ngIf="exceeding500Characters">{{data.Exceeding_500_characters}}</td>
-          <td *ngIf="latitudeLongitude">{{data.Latitude_Longitude}}</td>
-          <td *ngIf="multipleSpacesInTxt">{{data.Multiple_Spaces_in_txt}}</td>
-          <td *ngIf="noContentInBrackets">{{data.No_content_in_brackets}}</td>
-          <td *ngIf="noAcadEventsInTiming">{{data.No_AcadEvents_in_Timing}}</td>
-          <td *ngIf="noDateSpecialCharacters">{{data.No_date_special_characters}}</td>
-          <td *ngIf="noPhoneUrlInVoice">{{data.No_phone_url_in_voice}}</td>
-          <td *ngIf="noPreceeding0InRoomNo">{{data.No_preceeding_0_in_room_no}}</td>
-          <td *ngIf="noRefUrlInText">{{data.No_Ref_URL_in_text}}</td>
-          <td *ngIf="noSentenceInVoiceColumn">{{data.No_sentence_in_voice_column}}</td>
-          <td *ngIf="noTimingForAcadEvents">{{data.No_timing_for_acad_events}}</td>
-          <td *ngIf="noTimingsValuesInTxt">{{data.No_timings_values_in_txt}}</td>
-          <td *ngIf="numberingBulletPoints">{{data.Numbering_bullet_points}}</td>
-          <td *ngIf="processId">{{data.Process_ID}}</td>
-          <td *ngIf="specialCharInEntityName">{{data.Special_Char_in_Entity_Name}}</td>
-          <td *ngIf="startDateLessThanEndDate">{{data.Start_date_less_than_end_date}}</td>
-          <td *ngIf="startTimeLessThanEndTime">{{data.Start_time_less_than_end_time}}</td>
-          <td *ngIf="timeInHHMMSSFormat">{{data.Time_in_HH_MM_SS_format}}</td>
+         
+          <td *ngIf="data.Total_Issues !== 0"><i class="fa fa-times"></i>{{data.Total_Issues}}</td>
+          <td *ngIf="data.Total_Issues == 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="allowedIntentsInUnstructured && data.Allowed_intents_in_Unstructured !== 0"><i class="fa fa-times"></i>{{data.Allowed_intents_in_Unstructured}}</td>
+          <td *ngIf="allowedIntentsInUnstructured && data.Allowed_intents_in_Unstructured === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="checkForDuplicates && data.Check_for_duplicates !== 0"><i class="fa fa-times"></i>{{data.Check_for_duplicates}}</td>
+          <td *ngIf="checkForDuplicates && data.Check_for_duplicates === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="checkForMissingKeyword && data.Check_for_missing_Keyword !== 0"><i class="fa fa-times"></i>{{data.Check_for_missing_Keyword}}</td>
+          <td *ngIf="checkForMissingKeyword && data.Check_for_missing_Keyword === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="checkForCapitalization && data.Check_for_capitalization !== 0"><i class="fa fa-times"></i>{{data.Check_for_capitalization}}</td>
+          <td *ngIf="checkForCapitalization && data.Check_for_capitalization === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="checkIfDateTimeAreBlank && data.Check_if_date_time_are_blank !== 0"><i class="fa fa-times"></i>{{data.Check_if_date_time_are_blank}}</td>
+          <td *ngIf="checkIfDateTimeAreBlank && data.Check_if_date_time_are_blank === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="correctnessOfMapUrl && data.Correctness_of_MAP_URL !== 0"><i class="fa fa-times"></i>{{data.Correctness_of_MAP_URL}}</td>
+          <td *ngIf="correctnessOfMapUrl && data.Correctness_of_MAP_URL === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="correctnessOfShortRefUrl && data.Correctness_of_Short_Ref_URL !== 0"><i class="fa fa-times"></i>{{data.Correctness_of_Short_Ref_URL}}</td>
+          <td *ngIf="correctnessOfShortRefUrl && data.Correctness_of_Short_Ref_URL === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="dateInYYYYMMDDFormat && data.Date_in_YYYY_MM_DD_format !== 0"><i class="fa fa-times"></i>{{data.Date_in_YYYY_MM_DD_format}}</td>
+          <td *ngIf="dateInYYYYMMDDFormat && data.Date_in_YYYY_MM_DD_format === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="descriptionTextNotSame && data.Description_text_not_same !== 0"><i class="fa fa-times"></i>{{data.Description_text_not_same}}</td>
+          <td *ngIf="descriptionTextNotSame && data.Description_text_not_same === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="duplicateInEntityInteractn && data.Duplicate_in_Entity_Interactn !== 0"><i class="fa fa-times"></i>{{data.Duplicate_in_Entity_Interactn}}</td>
+          <td *ngIf="duplicateInEntityInteractn && data.Duplicate_in_Entity_Interactn === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="emailIdValidity && data.Email_id_validity !== 0"><i class="fa fa-times"></i>{{data.Email_id_validity}}</td>
+          <td *ngIf="emailIdValidity && data.Email_id_validity === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="exactDatesAvailable && data.Exact_dates_available !== 0"><i class="fa fa-times"></i>{{data.Exact_dates_available}}</td>
+          <td *ngIf="exactDatesAvailable && data.Exact_dates_available === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="exceeding500Characters && data.Exceeding_500_characters !== 0"><i class="fa fa-times"></i>{{data.Exceeding_500_characters}}</td>
+          <td *ngIf="exceeding500Characters && data.Exceeding_500_characters === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="latitudeLongitude && data.Latitude_Longitude !== 0"><i class="fa fa-times"></i>{{data.Latitude_Longitude}}</td>
+          <td *ngIf="latitudeLongitude && data.Latitude_Longitude == 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="multipleSpacesInTxt && data.Multiple_Spaces_in_txt !== 0"><i class="fa fa-times"></i>{{data.Multiple_Spaces_in_txt}}</td>
+          <td *ngIf="multipleSpacesInTxt && data.Multiple_Spaces_in_txt === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noContentInBrackets && data.No_content_in_brackets !== 0"><i class="fa fa-times"></i>{{data.No_content_in_brackets}}</td>
+          <td *ngIf="noContentInBrackets && data.No_content_in_brackets === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noAcadEventsInTiming && data.No_AcadEvents_in_Timing !== 0"><i class="fa fa-times"></i>{{data.No_AcadEvents_in_Timing}}</td>
+          <td *ngIf="noAcadEventsInTiming && data.No_AcadEvents_in_Timing === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noDateSpecialCharacters && data.No_date_special_characters !== 0"><i class="fa fa-times"></i>{{data.No_date_special_characters}}</td>
+          <td *ngIf="noDateSpecialCharacters && data.No_date_special_characters === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noPhoneUrlInVoice && data.No_phone_url_in_voice !== 0"><i class="fa fa-times"></i>{{data.No_phone_url_in_voice}}</td>
+          <td *ngIf="noPhoneUrlInVoice && data.No_phone_url_in_voice === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noPreceeding0InRoomNo && data.No_preceeding_0_in_room_no !== 0"><i class="fa fa-times"></i>{{data.No_preceeding_0_in_room_no}}</td>
+          <td *ngIf="noPreceeding0InRoomNo && data.No_preceeding_0_in_room_no === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noRefUrlInText && data.No_Ref_URL_in_text !== 0"><i class="fa fa-times"></i>{{data.No_Ref_URL_in_text}}</td>
+          <td *ngIf="noRefUrlInText && data.No_Ref_URL_in_text === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noSentenceInVoiceColumn && data.No_sentence_in_voice_column !== 0"><i class="fa fa-times"></i>{{data.No_sentence_in_voice_column}}</td>
+          <td *ngIf="noSentenceInVoiceColumn && data.No_sentence_in_voice_column === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noTimingForAcadEvents && data.No_timing_for_acad_events !== 0"><i class="fa fa-times"></i>{{data.No_timing_for_acad_events}}</td>
+          <td *ngIf="noTimingForAcadEvents && data.No_timing_for_acad_events === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="noTimingsValuesInTxt && data.No_timings_values_in_txt !== 0"><i class="fa fa-times"></i>{{data.No_timings_values_in_txt}}</td>
+          <td *ngIf="noTimingsValuesInTxt && data.No_timings_values_in_txt === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="numberingBulletPoints && data.Numbering_bullet_points !== 0"><i class="fa fa-times"></i>{{data.Numbering_bullet_points}}</td>
+          <td *ngIf="numberingBulletPoints && data.Numbering_bullet_points === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="processId && data.Process_ID !== 0"><i class="fa fa-times"></i>{{data.Process_ID}}</td>
+          <td *ngIf="processId && data.Process_ID === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="specialCharInEntityName && data.Special_Char_in_Entity_Name !== 0"><i class="fa fa-times"></i>{{data.Special_Char_in_Entity_Name}}</td>
+          <td *ngIf="specialCharInEntityName && data.Special_Char_in_Entity_Name === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="startDateLessThanEndDate && data.Start_date_less_than_end_date !== 0"><i class="fa fa-times"></i>{{data.Start_date_less_than_end_date}}</td>
+          <td *ngIf="startDateLessThanEndDate && data.Start_date_less_than_end_date === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="startTimeLessThanEndTime && data.Start_time_less_than_end_time !== 0"><i class="fa fa-times"></i>{{data.Start_time_less_than_end_time}}</td>
+          <td *ngIf="startTimeLessThanEndTime && data.Start_time_less_than_end_time === 0"><i class="fa fa-check"></i></td>
+
+          <td *ngIf="timeInHHMMSSFormat && data.Time_in_HH_MM_SS_format !== 0"><i class="fa fa-times"></i>{{data.Time_in_HH_MM_SS_format}}</td>
+          <td *ngIf="timeInHHMMSSFormat && data.Time_in_HH_MM_SS_format === 0"><i class="fa fa-check"></i></td>
           </tr>
       </tbody>
     </table>

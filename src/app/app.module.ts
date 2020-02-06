@@ -11,13 +11,15 @@ import { HttpClientModule }    from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DefineFileComponent } from './components/define-file/define-file.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EditConfigComponent,
-    DataRuleReportComponent
+    DataRuleReportComponent,
+    DefineFileComponent
   ],
   imports: [
     BrowserModule,
